@@ -1,0 +1,311 @@
+@charset "utf-8";
+/* Global style */;
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{font-weight:normal;}
+html,body,fieldset,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style: normal;}
+ul,ol,li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;font-weight: 300;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;content:'';}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+em,strong,b{font-weight:400;}
+textarea,input,button,select,keygen,legend{color:#777;outline:0;font-family: "Microsoft YaHei", Arial;font-size:100%;margin: 0;outline: none;vertical-align: baseline;_overflow:visible;-webkit-appearance: none;-webkit-tap-highlight-color: rgba(255,255,255,.3)}
+a{color:#333; border: none; text-decoration: none;outline:none;}
+a:focus{outline: 0;outline-style: none;}
+img{overflow: hidden;border: 0 none;}
+html{text-align: center;background-color: #f5f5f5!important;overflow:hidden;}
+[v-cloak] { display: none!important; }
+html,body{       
+    background: url("../img/bg.png");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+//flex 布局
+.flex-col, .flex-row {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;display:inline-flex;display:-ms-inline-flexbox;}
+.flex-col {-ms-flex-direction: column;-webkit-flex-direction: column;flex-direction: column;}
+.flex-col.flex-y-center {-webkit-justify-content: center;justify-content: center;-ms-justify-content: center;-ms-flex-pack:center;}
+.flex-col.flex-top {-webkit-justify-content: flex-start;justify-content: flex-start;-ms-justify-content: flex-start;-ms-flex-pack:start;}
+.flex-col.flex-bottom {-webkit-justify-content: flex-end;justify-content: flex-end;-ms-justify-content: flex-end;-ms-flex-pack:end;}
+.flex-col.flex-x-center { -webkit-box-align: center;-webkit-align-items: center;-ms-flex-align: center;align-items: center;-ms-flex-align:center;}
+.flex-col.flex-left {align-items: flex-start;-ms-align-content: flex-start;-webkit-align-content: flex-start;align-content: flex-start;-ms-flex-line-pack:start;}
+.flex-col.flex-right {align-items: flex-end;-ms-align-content: flex-end;-webkit-align-content: flex-end;align-content: flex-end;-ms-flex-line-pack:end;}
+.flex-row {-ms-flex-direction: row;-webkit-flex-direction: row;flex-direction: row;}
+.flex-row.flex-x-center {-webkit-box-pack: center;-webkit-justify-content: center;-ms-flex-pack: center;justify-content: center;-ms-flex-pack:center;}
+.flex-row.flex-y-center {-webkit-box-align: center;-webkit-align-items: center;-ms-flex-align: center;align-items: center;-ms-flex-align:center;}
+.flex-row.flex-left {-webkit-justify-content: flex-start;justify-content: flex-start;-ms-justify-content: flex-start;-ms-flex-pack:start;}
+.flex-row.flex-right {-webkit-justify-content: flex-end;justify-content: flex-end;-ms-justify-content: flex-end;-ms-flex-pack:end;}
+.flex-row.flex-bottom {align-items: flex-end;-ms-align-content: flex-end;-webkit-align-content: flex-end;align-content: flex-end;-ms-flex-line-pack:end;}
+.flex-row.flex-top {align-items: flex-start;-ms-align-content: flex-start;-webkit-align-content: flex-start;align-content: flex-start;-ms-flex-line-pack:start;}
+.flex-row.flex-space-around{-webkit-justify-content: space-around;justify-content: space-around;-ms-justify-content: space-around;-ms-flex-pack:justify;}
+.flex-row.flex-space-between{-webkit-box-pack: justify;-webkit-justify-content: space-between;-ms-flex-pack: justify;justify-content: space-between;-ms-flex-pack:justify;}
+.flex-col.flex-space-around{-webkit-justify-content: space-around;justify-content: space-around;-ms-justify-content: space-around;-ms-flex-pack:justify;}
+.flex-col.flex-space-between{-webkit-justify-content: space-between;justify-content: space-between;-ms-justify-content: space-between;-ms-flex-pack:justify;}
+//字体大小
+.px2px(@px,@name:font-size){
+    @{name}: round(@px / 2) * 1px;
+    [data-dpr="2"] & {
+        @{name}: @px * 1px;
+    }
+    [data-dpr="2.5"] & {
+        @{name}: round(@px * 2.5 / 2) * 1px;
+    }
+    [data-dpr="2.75"] & {
+        @{name}: round(@px * 2.75 / 2) * 1px;
+    }
+    [data-dpr="3"] & {
+        @{name}: round(@px / 2 * 3) * 1px
+    }
+    [data-dpr="4"] & {
+        @{name}: @px * 2px;
+    }
+}
+//主色
+@mainColor:#e4af0a;
+@titleColor:#464646;
+@timeContentColor:#737373;
+@borderColor:#c9c9c9;
+
+// index
+.index{
+    width: 700px;
+    // 筛选
+    .choice{
+        margin-top: 40px;
+        color:@mainColor;
+        font-size: 48px;
+        select{
+            border:none;
+            background: rgba(0,0,0,0);
+            text-align: center;
+            option{
+                border:none;
+                text-align: center;
+                color:@mainColor;
+                font-size: 48px;
+            }
+        }
+        .icon-select{
+            img{
+                width: 25px;
+                height: 15px;
+            }
+        }
+    }
+    // 标题
+    .title{
+        margin-top: 40px;
+        width: 700px;
+        p{
+            font-size: 72px;
+            font-weight: 600;
+            color: #000;
+        }
+    }
+    // 事件列表
+    .lists{
+        margin-top: 20px;
+        width: 700px;        
+        // 单个列表
+        .list-border{
+            margin-top: 20px;
+            width: 700px;
+            height: 120px;
+            border-radius: 20px;
+            border:3px solid @borderColor;
+            .list{
+                width: 660px;
+                height: 100px;                
+                // 主标题+时间
+                .titlesTime{
+                    width: 660px;
+                    .titles{
+                        p{
+                            font-size: 36px;
+                            color: @titleColor;
+                        }
+                    }
+                    .time{
+                        p{
+                            font-size: 30px;
+                            color: @timeContentColor;
+                        }
+                    }
+                }
+                // 主要内容
+                .content{
+                    width: 660px;
+                    .text{
+                        p{
+                            font-size: 30px;
+                            color: @timeContentColor;
+                        }
+                    }
+                    .delect{
+                        img{
+                            width: 22px;
+                            height: 22px;
+                        }
+                    }
+                }
+            }
+        }
+        .finishT{
+             border:3px solid #7bc4dc;
+        }
+        .overT{
+             border:3px solid #dc7b86;
+        }
+    }
+    // 底部功能键
+    .bottomFunction{
+        position: fixed;
+        bottom: 30px;
+        width: 700px;  
+        .f1{
+            img{
+                width: 42px;
+                height: 42px;
+            }
+        }
+        .note{
+            p{
+                font-size: 24px;
+                color:#000;
+            }
+        }
+        .f2{
+            img{
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}
+//addList
+.addList{
+    margin-top: 40px;
+    width: 700px;
+    .headPosition{
+        width: 700px;
+        .left{
+            .leftBack-icon{
+                img{
+                    width: 24px;
+                    height: 41px;
+                }
+            }
+            .leftBack-text{
+                margin-left: 20px;
+                p{
+                    letter-spacing: 4px;
+                    font-weight: 700;
+                    font-size: 36px;
+                    color:@mainColor;
+                }
+            }
+        }
+        .right{
+            p{
+                font-weight: 700;
+                letter-spacing: 2px;
+                font-size: 36px;
+                color:@mainColor;
+            }
+        }
+    }
+    .textTitle{
+        margin-top: 40px;
+         width: 700px;
+        .smallHead{
+            p{
+                font-size: 36px;
+                color:@titleColor;
+                font-weight: 700;
+            }
+        }
+        .textTitle-input{
+            margin-top: 10px;
+            input{
+                width: 700px;
+                height: 65px;
+                border-radius: 20px;
+                border:3px solid @borderColor;
+                color: @timeContentColor;
+            }
+        }
+    }
+    .textContent{
+        margin-top: 20px;
+         width: 700px;
+         position: relative;
+        .smallHead{
+            p{
+                font-size: 36px;  
+                color:@titleColor;
+                font-weight: 700;              
+            }
+        }
+        .textContent-input{
+            margin-top: 10px;
+            width: 700px;
+            border-radius: 20px;
+            border:3px solid @borderColor;
+            color: @timeContentColor;
+            textarea{
+                width: 700px;
+                height: 300px;
+                font-size: 30px;
+                border:none;
+                color: @timeContentColor;
+                background: rgba(0,0,0,0);
+                appearance: none;
+                text-indent: 10px;
+            }
+            p{
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                font-size: 17px;
+                color:#737373;
+            }
+        }
+    }
+    .textTime{
+        margin-top: 20px;
+         width: 700px;
+        .smallHead{
+            p{
+                color:@titleColor;
+                font-size: 36px;  
+                font-weight: 700;                
+            }
+        }
+        .textTime-input{
+            margin-top: 10px;
+            height: 65px;
+            border-radius: 20px;
+            border:3px solid @borderColor;
+            width: 700px;
+            input{     
+                     
+                color: @timeContentColor;
+            }
+            input[type='time']{
+                width: 100px;                     
+            }
+        }
+    }
+    input{
+        border:none;
+        background: rgba(0,0,0,0);
+        appearance: none;
+        text-indent: 10px;
+    }
+
+}
