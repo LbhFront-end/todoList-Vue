@@ -62,14 +62,20 @@ export default {
       textarea: "",
       date: "",
       time: "",
-      count: 0
+      count: 0,
+      id: ""
     };
   },
   created() {
     self = this;
     self.getDefaultTime();
+    self.produceId();
   },
   methods: {
+    //生成随机id
+    produceId() {
+      self.id = Math.random().toString(16);
+    },
     //   监控字体的多少
     textareaCount() {
       var textLength = self.textarea.length;
@@ -99,16 +105,45 @@ export default {
       self.time = [hour, minute].join(":");
     },
     // 判断时间是否过期
-    getTimeJudge(){
-        var dates = self.date +" " +self.time;
-        var setDate = new Date(dates);
-        var today= new Date();
-        var judge = today.getTime()-setDate.getTime();
-        if(judge>0){
-            return false;
-        }else{
-            return true;
-        }
+    getTimeJudge() {
+      var dates = self.date + " " + self.time;
+      var setDate = new Date(dates);
+      var today = new Date();
+      var judge = today.getTime() - setDate.getTime();
+      if (judge > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    //获取之前的localStorage 并且添加数据
+    getOldStorage() {
+      var oldList = localStorage.getItem("List");
+      var oldStorage = JSON.parse(oldList);
+
+      var newDate = {
+        id: self.id,
+        title: self.title,
+        content: self.textarea,
+        time: self.date + " " + self.time,
+        status: 0
+      };
+      if (oldStorage) {
+        oldStorage.push(newDate);
+        var a = JSON.stringify(oldStorage);
+
+        console.log('old'+a);
+        console.log('old'+oldStorage);
+        localStorage.setItem("List", a);
+      } else {
+        var stroage = [];
+        stroage.push(newDate);
+        var a = JSON.stringify(stroage);
+
+        console.log(a);
+        console.log(stroage);
+        localStorage.setItem("List", a);
+      }
     },
     // 添加备忘录
     addList() {
@@ -126,15 +161,16 @@ export default {
           duration: 3000
         });
         return false;
-      } else if(self.getTimeJudge()){
+      } else if (!self.getTimeJudge()) {
         Toast({
-          message: "不可以选择已经过的时间",
+          message: "不可以选择过去的时间",
           position: "top",
           duration: 3000
         });
         return false;
-      }else{
-          console.log('good');
+      } else {
+        self.getOldStorage();
+        self.$router.push("/");
       }
     }
   }

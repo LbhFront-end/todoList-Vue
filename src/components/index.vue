@@ -51,7 +51,7 @@
                     <img src="../../static/img/classify.png" alt="">
                 </div>
                 <div class="note">
-                    <p>{{total}}个备忘录</p>
+                    <p>总共 {{total}} 个备忘录</p>
                 </div>
                 <div class="f2">
                     <router-link :to="{path:'/addList'}">
@@ -70,37 +70,23 @@ export default {
   data() {
     return {
       value: "0",
-      total: 3,
+      total: 0,
       newList: "",
-      List: [
-        {
-          id: "e1",
-          title: "酱油",
-          content: "去楼下阿姨那里买酱油，顺便喂一下狗狗狗狗狗",
-          status: "0",
-          time: "Thu Jun 15 2018 14:12:30 GMT+0800 (中国标准时间)"
-        },
-        {
-          id: "e2",
-          title: "买糖",
-          content: "下班回去的时候去附近的超市买个糖来来来来",
-          status: "1",
-          time: "Thu Jun 14 2018 20:12:30 GMT+0800 (中国标准时间)"
-        },
-        {
-          id: "e3",
-          title: "买个铁锤",
-          content: "下班回去的时候去附近买个铁锤来修理..",
-          status: "2",
-          time: "Thu Jun 13 2018 05:12:30 GMT+0800 (中国标准时间)"
-        }
-      ]
+      List: []
     };
   },
   created() {
     self = this;
+    self.getDate();
   },
   methods: {
+    //   获取localStorage里面的数据
+    getDate() {
+      var getList = localStorage.getItem("List");
+      self.List = JSON.parse(getList);
+      console.log(self.List);
+      self.total = self.List.length;
+    },
     //已完成|全部|未完成
     getBorderClass(status) {
       if (status == 0) {
@@ -113,8 +99,12 @@ export default {
     // 多余的字变成..
     getContent(content) {
       var str = content;
-      str = str.substr(0, 18) + "...";
-      return str;
+      if (str.length > 18) {
+        str = str.substr(0, 18) + "...";
+        return str;
+      } else {
+        return str;
+      }
     },
     //时间判断
     getTime(oldDate) {
@@ -131,7 +121,18 @@ export default {
       var hours = oldDate.getHours(); //小时
       var minutes = oldDate.getMinutes(); //分
       var seconds = oldDate.getSeconds(); //秒
-
+      if (Month < 10) {
+        Month = "0" + Month;
+      }
+      if (date < 10) {
+        date = "0" + date;
+      }
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
       //判断是否是今天|明天|昨天
       if (nowDate.toDateString() === new Date(oldDate).toDateString()) {
         if (hours < 12) {
@@ -173,16 +174,16 @@ export default {
         self.newList = self.List;
       } else {
         self.newList = self.List.filter(item => item.status == value);
+        if (!self.newList) {
+          return;
+        }
       }
     },
     //删除
     deleteList(id) {
       MessageBox.confirm("确定删除此条备忘消息？").then(action => {
-        if (!self.newList) {
-          self.newList = self.List.filter(item => item.id !== id);
-        } else {
-          self.newList = self.newList.filter(item => item.id !== id);
-        }
+        self.newList = self.newList.filter(item => item.id !== id);
+        
       });
     }
   }
