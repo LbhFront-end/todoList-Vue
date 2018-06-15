@@ -131,17 +131,11 @@ export default {
       if (oldStorage) {
         oldStorage.push(newDate);
         var a = JSON.stringify(oldStorage);
-
-        console.log('old'+a);
-        console.log('old'+oldStorage);
         localStorage.setItem("List", a);
       } else {
         var stroage = [];
         stroage.push(newDate);
         var a = JSON.stringify(stroage);
-
-        console.log(a);
-        console.log(stroage);
         localStorage.setItem("List", a);
       }
     },

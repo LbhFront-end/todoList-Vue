@@ -19,35 +19,40 @@
                 <p>待办事件</p>
             </div>
             <!-- 事件列表 -->
-            <div class="lists flex-col flex-x-center flex-y-center">
+            <div class="lists flex-col flex-x-center flex-y-center" v-if="total">
                 <!-- 单个列表 -->
                 <!-- 列表Border -->
-                <div class="list-border flex-col flex-x-center flex-y-center" v-for="item in newList||List  " :key="item.id" :class="getBorderClass(item.status)">
-                    <div class="list flex-col flex-x-center flex-y-center">
-                        <!-- 主标题+时间 -->
-                        <div class="titlesTime flex-row flex-space-between flex-y-center">
-                            <div class="titles">
-                                <p>{{item.title}}</p>
+                <li class="list-border flex-col flex-x-center flex-y-center" v-for="item in newList||List  " :key="item.id" :class="getBorderClass(item.id,item.time,item.status)">
+                    <router-link :to="'/changeList?id='+item.id">
+                        <div class="list flex-col flex-x-center flex-y-center">
+                            <!-- 主标题+时间 -->
+                            <div class="titlesTime flex-row flex-space-between flex-y-center">
+                                <div class="titles">
+                                    <p>{{item.title}}</p>
+                                </div>
+                                <div class="time">
+                                    <p>{{getTime(item.time)}}</p>                            
+                                </div>
                             </div>
-                            <div class="time">
-                                <p>{{getTime(item.time)}}</p>                            
+                            <!-- 主要内容 -->
+                            <div class="content flex-row flex-space-between flex-y-center">
+                                <div class="text">
+                                    <p>{{getContent(item.content)}}</p>
+                                </div>
+                                <div class="delect" @click="deleteList(item.id)">
+                                    <img src="../../static/img/c-delete .png">
+                                </div>
                             </div>
                         </div>
-                        <!-- 主要内容 -->
-                        <div class="content flex-row flex-space-between flex-y-center">
-                            <div class="text">
-                                <p>{{getContent(item.content)}}</p>
-                            </div>
-                            <div class="delect" @click="deleteList(item.id)">
-                                <img src="../../static/img/c-delete .png">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </router-link>
+                </li>
             </div>
+            <div class="tip flex-col flex-x-center flex-y-center" v-else>
+                <p>您暂时还没有备忘录哦,快点击右下角添加吧</p>
+            </div>            
             <!-- 底部功能键 -->
             <div class="bottomFunction flex-row flex-space-between flex-y-center">
-                <div class="f1">
+                <div class="f1" @click="clearStorage()">
                     <img src="../../static/img/classify.png" alt="">
                 </div>
                 <div class="note">
@@ -80,17 +85,64 @@ export default {
     self.getDate();
   },
   methods: {
+    //   js each模仿jq each
+    each(object, callback) {
+      var type = (function() {
+        switch (object.constructor) {
+          case Object:
+            return "Object";
+            break;
+          case Array:
+            return "Array";
+            break;
+          case NodeList:
+            return "NodeList";
+            break;
+          default:
+            return "null";
+            break;
+        }
+      })();
+      // 为数组或类数组时, 返回: index, value
+      if (type === "Array" || type === "NodeList") {
+        // 由于存在类数组NodeList, 所以不能直接调用every方法
+        [].every.call(object, function(v, i) {
+          return callback.call(v, i, v) === false ? false : true;
+        });
+      } else if (type === "Object") {
+        // 为对象格式时,返回:key, value
+        for (var i in object) {
+          if (callback.call(object[i], i, object[i]) === false) {
+            break;
+          }
+        }
+      }
+    },
     //   获取localStorage里面的数据
     getDate() {
       var getList = localStorage.getItem("List");
       self.List = JSON.parse(getList);
-      console.log(self.List);
-      self.total = self.List.length;
+      if (self.List) {
+        self.total =  self.List.length;
+      }
     },
-    //已完成|全部|未完成
-    getBorderClass(status) {
+    //已完成|全部|未完成|改变超时的status
+    getBorderClass(id, time, status) {
+      var oldDate = new Date(time);
+      var nowDate = new Date();
+      var judge = nowDate.getTime() - oldDate.getTime();
       if (status == 0) {
-        return "";
+        if (judge > 0) {
+          var a = self.List;
+          self.each(a, function(i, v) {
+            if (v.id == id) {
+              v.status = 2;
+            }
+          });
+          return "overT";
+        } else {
+          return "";
+        }
       } else if (status == 1) return "finishT";
       else {
         return "overT";
@@ -182,8 +234,16 @@ export default {
     //删除
     deleteList(id) {
       MessageBox.confirm("确定删除此条备忘消息？").then(action => {
-        self.newList = self.newList.filter(item => item.id !== id);
-        
+        self.List = self.List.filter(item => item.id !== id);
+        var a = JSON.stringify(self.List);
+        localStorage.setItem("List", a);
+      });
+    },
+    //清除所有
+    clearStorage() {
+      MessageBox.confirm("确定删除所有消息？").then(action => {
+        localStorage.removeItem("List");
+        self.getDate();
       });
     }
   }

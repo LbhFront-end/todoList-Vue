@@ -118,6 +118,9 @@ html,body{
             height: 120px;
             border-radius: 20px;
             border:3px solid @borderColor;
+            &:hover{
+                box-shadow: 1px 1px 5px #999;
+            }
             .list{
                 width: 660px;
                 height: 100px;                
@@ -161,6 +164,11 @@ html,body{
         .overT{
              border:3px solid #dc7b86;
         }
+    }
+    .tip{
+        margin-top: 100px;
+        font-size: 24px;
+        color:rgb(67, 43, 122);
     }
     // 底部功能键
     .bottomFunction{
@@ -296,8 +304,8 @@ html,body{
                      
                 color: @timeContentColor;
             }
-            input[type='time']{
-                width: 100px;                     
+            input[type='time']{     
+                width: 120px;                     
             }
         }
     }
@@ -307,5 +315,146 @@ html,body{
         appearance: none;
         text-indent: 10px;
     }
+
+}
+
+//changeList
+.changeList{
+    margin-top: 40px;
+    width: 700px;
+    .headPosition{
+        width: 700px;
+        .left{
+            .leftBack-icon{
+                img{
+                    width: 24px;
+                    height: 41px;
+                }
+            }
+            .leftBack-text{
+                margin-left: 20px;
+                p{
+                    letter-spacing: 4px;
+                    font-weight: 700;
+                    font-size: 36px;
+                    color:@mainColor;
+                }
+            }
+        }
+        .right{
+            p{
+                font-weight: 700;
+                letter-spacing: 2px;
+                font-size: 36px;
+                color:@mainColor;
+            }
+        }
+    }
+    .textTitle{
+        margin-top: 40px;
+         width: 700px;
+        .smallHead{
+            p{
+                font-size: 36px;
+                color:@titleColor;
+                font-weight: 700;
+            }
+        }
+        .textTitle-input{
+            margin-top: 10px;
+            input{
+                width: 700px;
+                height: 65px;
+                border-radius: 20px;
+                border:3px solid @borderColor;
+                color: @timeContentColor;
+            }
+        }
+    }
+    .textContent{
+        margin-top: 20px;
+         width: 700px;
+         position: relative;
+        .smallHead{
+            p{
+                font-size: 36px;  
+                color:@titleColor;
+                font-weight: 700;              
+            }
+        }
+        .textContent-input{
+            margin-top: 10px;
+            width: 700px;
+            border-radius: 20px;
+            border:3px solid @borderColor;
+            color: @timeContentColor;
+            textarea{
+                width: 700px;
+                height: 300px;
+                font-size: 30px;
+                border:none;
+                color: @timeContentColor;
+                background: rgba(0,0,0,0);
+                appearance: none;
+                text-indent: 10px;
+            }
+            p{
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                font-size: 17px;
+                color:#737373;
+            }
+        }
+    }
+    .textTime{
+        margin-top: 20px;
+         width: 700px;
+        .smallHead{
+            p{
+                color:@titleColor;
+                font-size: 36px;  
+                font-weight: 700;                
+            }
+        }
+        .textTime-input{
+            margin-top: 10px;
+            height: 65px;
+            border-radius: 20px;
+            border:3px solid @borderColor;
+            width: 700px;
+            input{     
+                     
+                color: @timeContentColor;
+            }
+            input[type='time']{     
+                width: 120px;                     
+            }
+        }
+    }
+    input{
+        border:none;
+        background: rgba(0,0,0,0);
+        appearance: none;
+        text-indent: 10px;
+    }
+        // 底部功能键
+        .bottomFunction{
+            position: fixed;
+            bottom: 30px;
+            width: 700px;  
+            .f1{
+                img{
+                    width: 36px;
+                    height: 32px;
+                }
+            }
+            .f2{
+                img{
+                    width: 49px;
+                    height: 35px;
+                }
+            }
+        }
 
 }
