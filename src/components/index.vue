@@ -39,9 +39,9 @@
                                 <div class="text">
                                     <p>{{getContent(item.content)}}</p>
                                 </div>
-                                <div class="delect" @click="deleteList(item.id)">
+                                <!-- <div class="delect" @click="deleteList(item.id)">
                                     <img src="../../static/img/c-delete .png">
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </router-link>

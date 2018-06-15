@@ -226,12 +226,13 @@ export default {
       localStorage.setItem("List", a);
     },
     //删除
-    deleteList(id) {
+    deleteList() {
       var getList = localStorage.getItem("List");
       var List = JSON.parse(getList);
       MessageBox.confirm("确定删除此条备忘消息？").then(action => {
-        List = List.filter(item => item.id !== id);
-        var a = JSON.stringify(self.List);
+        localStorage.removeItem("List");
+        List = List.filter(item => item.id !== self.oldId);
+        var a = JSON.stringify(List);
         localStorage.setItem("List", a);
         self.$router.push("/");
       });
