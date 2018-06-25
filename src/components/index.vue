@@ -2,17 +2,24 @@
     <div class="main">
         <div class="index flex-col flex-x-center flex-y-center">
             <!-- 筛选 -->
-            <div class="choice flex-x-center flex-y-center flex-row">
+            <div class="choice flex-space-between flex-y-center flex-row">
+              <div class="flex-row flex-space-between flex-y-center">
                 <select v-model="value" id="all" @change="choiceList(value)">
                     <option value="0">全部</option>
                     <option value="1">已完成</option>
                     <option value="2">未完成</option>
                 </select>
-                <div class="icon-select">
-                    <label for="all">
+                <div class="icon-select flex-x-center flex-y-center flex-row">
+                    <label for="all flex-x-center flex-y-center flex-row">
                         <img src="../../static/img/select.png">
                     </label>
                 </div>
+              </div>
+              <div>
+                <router-link :to="{path:'/addList'}">
+                    <p>添加</p>
+                </router-link>                                
+              </div>
             </div>
             <!-- 标题 -->
             <div class="title flex-left flex-col flex-y-center">
@@ -23,28 +30,33 @@
                 <!-- 单个列表 -->
                 <!-- 列表Border -->
                 <li class="list-border flex-col flex-x-center flex-y-center" v-for="item in newList||List  " :key="item.id" :class="getBorderClass(item.id,item.time,item.status)">
-                    <router-link :to="'/changeList?id='+item.id">
-                        <div class="list flex-col flex-x-center flex-y-center">
-                            <!-- 主标题+时间 -->
-                            <div class="titlesTime flex-row flex-space-between flex-y-center">
-                                <div class="titles">
-                                    <p>{{item.title}}</p>
-                                </div>
-                                <div class="time">
-                                    <p>{{getTime(item.time)}}</p>                            
-                                </div>
+                    <div class="list flex-col flex-x-center flex-y-center">
+                        <!-- 主标题+时间 -->
+                        <div class="titlesTime flex-row flex-space-between flex-y-center">
+                            <div class="titles">
+                                <p>{{item.title}}</p>
                             </div>
-                            <!-- 主要内容 -->
-                            <div class="content flex-row flex-space-between flex-y-center">
-                                <div class="text">
-                                    <p>{{getContent(item.content)}}</p>
-                                </div>
-                                <!-- <div class="delect" @click="deleteList(item.id)">
-                                    <img src="../../static/img/c-delete .png">
-                                </div> -->
+                            <div class="time">
+                                <p>{{item.time}}</p>                            
                             </div>
                         </div>
-                    </router-link>
+                        <!-- 主要内容 -->
+                        <div class="content flex-row flex-space-between flex-y-center">
+                            <div class="text">
+                                <p>{{getContent(item.content)}}</p>
+                            </div>
+                            <div class="edit-delect flex-row flex-space-between flex-y-center">
+                              <div class="edit">
+                                  <router-link :to="'/changeList?id='+item.id">
+                                    <img src="../../static/img/add.png" alt="">
+                                  </router-link>
+                              </div>
+                              <div class="delect" @click="deleteList(item.id)">
+                                  <img src="../../static/img/c-delete .png">
+                              </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </div>
             <div class="tip flex-col flex-x-center flex-y-center" v-else>
@@ -122,8 +134,11 @@ export default {
     getDate() {
       var getList = localStorage.getItem("List");
       self.List = JSON.parse(getList);
+      // alert(getList);
       if (self.List) {
         self.total =  self.List.length;
+      }else{
+        self.total =  0;
       }
     },
     //已完成|全部|未完成|改变超时的status
@@ -244,6 +259,7 @@ export default {
       MessageBox.confirm("确定删除所有消息？").then(action => {
         localStorage.removeItem("List");
         self.getDate();
+        self.$router.push("/");
       });
     }
   }

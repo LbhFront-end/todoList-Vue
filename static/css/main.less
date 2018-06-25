@@ -71,14 +71,61 @@ html,body{
 @timeContentColor:#737373;
 @borderColor:#c9c9c9;
 
+//框架相关
+// 框架相关-提示框
+.mint-indicator-text{
+    font-size:48px !important;   
+}
+.mint-toast{
+    width: 300px !important;
+    span.mint-toast-text{        
+        font-size:24px !important;   
+      }
+} 
+// 框架相关-confirm框
+.mint-msgbox{
+    .mint-msgbox-header{
+        .mint-msgbox-title{
+            font-size:36px ;
+        }
+    }
+    .mint-msgbox-content{
+        .mint-msgbox-message{
+            font-size:24px;
+        }        
+    }
+    .mint-msgbox-btns{
+        font-size:24px ;
+        height: 1rem;
+    }
+}
+// 框架相关-time-picker框
+.picker-toolbar{    
+    height: 1rem  !important;
+    line-height:1rem !important;
+    span{
+        font-size:24px !important;
+        height: 1rem  !important;
+        line-height:1rem !important;
+    }
+}
+.picker-slot{
+    font-size:24px !important;
+}
 // index
 .index{
     width: 700px;
     // 筛选
     .choice{
+        position: relative;
+        width: 700px;
         margin-top: 40px;
         color:@mainColor;
         font-size: 48px;
+        a{
+            color:@mainColor;
+            font-size: 48px;
+        }
         select{
             border:none;
             background: rgba(0,0,0,0);
@@ -91,10 +138,15 @@ html,body{
             }
         }
         .icon-select{
-            img{
-                width: 25px;
-                height: 15px;
-            }
+            position: absolute;
+            left: 120px;
+            top: 0;
+            label{
+                img{
+                    width: 25px;
+                    height: 15px;
+                }
+            }           
         }
     }
     // 标题
@@ -143,16 +195,26 @@ html,body{
                 // 主要内容
                 .content{
                     width: 660px;
+                    margin-top: 10px;
                     .text{
                         p{
                             font-size: 30px;
                             color: @timeContentColor;
                         }
                     }
-                    .delect{
-                        img{
-                            width: 22px;
-                            height: 22px;
+                    .edit-delect{
+                        .edit{     
+                            margin-right: 40px;                   
+                            img{
+                                width: 30px;
+                                height: 30px;
+                            }
+                        }
+                        .delect{
+                            img{
+                                width: 30px;
+                                height: 30px;
+                            }
                         }
                     }
                 }
@@ -300,12 +362,10 @@ html,body{
             border-radius: 20px;
             border:3px solid @borderColor;
             width: 700px;
-            input{     
-                     
+            .modal-input{     
+                width: 200px;
+                margin-left: 10px;
                 color: @timeContentColor;
-            }
-            input[type='time']{     
-                width: 120px;                     
             }
         }
     }
@@ -423,12 +483,10 @@ html,body{
             border-radius: 20px;
             border:3px solid @borderColor;
             width: 700px;
-            input{     
-                     
+            .modal-input{     
+                width: 200px;
+                margin-left: 10px;
                 color: @timeContentColor;
-            }
-            input[type='time']{     
-                width: 120px;                     
             }
         }
     }

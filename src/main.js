@@ -9,7 +9,8 @@ import 'lib-flexible'
 import '../static/css/main.css'
 import md5 from 'js-md5'
 import 'mint-ui/lib/style.css';
-
+import { DatetimePicker } from 'mint-ui';
+Vue.component(DatetimePicker.name, DatetimePicker);
 Vue.prototype.$axios = axios
 import { Swipe, SwipeItem } from "mint-ui";
 Vue.component(Swipe.name, Swipe);

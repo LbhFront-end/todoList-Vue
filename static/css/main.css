@@ -278,11 +278,48 @@ body {
   -ms-justify-content: space-between;
   -ms-flex-pack: justify;
 }
+.mint-indicator-text {
+  font-size: 48px !important;
+}
+.mint-toast {
+  width: 300px !important;
+}
+.mint-toast span.mint-toast-text {
+  font-size: 24px !important;
+}
+.mint-msgbox .mint-msgbox-header .mint-msgbox-title {
+  font-size: 36px ;
+}
+.mint-msgbox .mint-msgbox-content .mint-msgbox-message {
+  font-size: 24px;
+}
+.mint-msgbox .mint-msgbox-btns {
+  font-size: 24px ;
+  height: 1rem;
+}
+.picker-toolbar {
+  height: 1rem  !important;
+  line-height: 1rem !important;
+}
+.picker-toolbar span {
+  font-size: 24px !important;
+  height: 1rem  !important;
+  line-height: 1rem !important;
+}
+.picker-slot {
+  font-size: 24px !important;
+}
 .index {
   width: 700px;
 }
 .index .choice {
+  position: relative;
+  width: 700px;
   margin-top: 40px;
+  color: #e4af0a;
+  font-size: 48px;
+}
+.index .choice a {
   color: #e4af0a;
   font-size: 48px;
 }
@@ -297,7 +334,12 @@ body {
   color: #e4af0a;
   font-size: 48px;
 }
-.index .choice .icon-select img {
+.index .choice .icon-select {
+  position: absolute;
+  left: 120px;
+  top: 0;
+}
+.index .choice .icon-select label img {
   width: 25px;
   height: 15px;
 }
@@ -341,14 +383,22 @@ body {
 }
 .index .lists .list-border .list .content {
   width: 660px;
+  margin-top: 10px;
 }
 .index .lists .list-border .list .content .text p {
   font-size: 30px;
   color: #737373;
 }
-.index .lists .list-border .list .content .delect img {
-  width: 22px;
-  height: 22px;
+.index .lists .list-border .list .content .edit-delect .edit {
+  margin-right: 40px;
+}
+.index .lists .list-border .list .content .edit-delect .edit img {
+  width: 30px;
+  height: 30px;
+}
+.index .lists .list-border .list .content .edit-delect .delect img {
+  width: 30px;
+  height: 30px;
 }
 .index .lists .finishT {
   border: 3px solid #7bc4dc;
@@ -473,11 +523,10 @@ body {
   border: 3px solid #c9c9c9;
   width: 700px;
 }
-.addList .textTime .textTime-input input {
+.addList .textTime .textTime-input .modal-input {
+  width: 200px;
+  margin-left: 10px;
   color: #737373;
-}
-.addList .textTime .textTime-input input[type='time'] {
-  width: 120px;
 }
 .addList input {
   border: none;
@@ -580,11 +629,10 @@ body {
   border: 3px solid #c9c9c9;
   width: 700px;
 }
-.changeList .textTime .textTime-input input {
+.changeList .textTime .textTime-input .modal-input {
+  width: 200px;
+  margin-left: 10px;
   color: #737373;
-}
-.changeList .textTime .textTime-input input[type='time'] {
-  width: 120px;
 }
 .changeList input {
   border: none;
